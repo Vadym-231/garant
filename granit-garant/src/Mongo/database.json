@@ -1,0 +1,6 @@
+{
+  "Host": "localhost",
+  "Port": "27017",
+  "DataBaseName": "porfolioDb",
+  "ConnectUrl": "mongodb+srv://Admin:akijpo12lkspkpkKKHG23@cluster0.px065.mongodb.net/porfolioDb?retryWrites=true&w=majority"
+}
