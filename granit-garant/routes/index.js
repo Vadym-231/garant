@@ -28,14 +28,10 @@ router.get('/images/:image',(req, res) => {
   }
 })
 
-router.get('/getResume',(req, res) => {
-  res.download(path.join(__dirname,'../public/res.pdf'));
-  return;
-})
 //__dirname,'../src/bundle.js'path.join('C:\\Users\\Вадим\\WebstormProjects\\portfolio_react\\dist\\bundle.js'
 router.get('/bundle', function(req, res) {
   try {
-    fileGetter(res,path.join('C:\\Users\\Вадим\\WebstormProjects\\react_garant\\dist\\bundle.js'),'text/javascript').pipe(res)
+    fileGetter(res,path.join(__dirname,'../src/bundle.js'),'text/javascript').pipe(res)
   }catch (e) {
     console.log(e)
 

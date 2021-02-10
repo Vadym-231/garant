@@ -5,8 +5,6 @@ const db_config = require('../src/Mongo/database.json')
 const multer  = require("multer");
 var fileUpload = require('express-fileupload');
 const tempJson = require('../src/about_us.json')
-const fs= require('fs')
-const path = require('path')
 const partners = require('../src/Mongo/mongo_model/partners_list')
 const resume  = require('../src/Mongo/mongo_model/resume_model')
 const vacansies = require('../src/Mongo/mongo_model/vacancies_feedback')
@@ -16,35 +14,14 @@ const order = require('../src/Mongo/mongo_model/makeOrder')
 
 
 
-const error_logger = require('../src/logger')
+
 
 /* GET api request. */
 
 const mongo = new Mongo(db_config.ConnectUrl,'');
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        console.log(req.body.internalUserID) // YAY, IT'S POPULATED
-        cb(null, 'upload/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
 
-var upload = multer({ storage: storage }).single('files');
-
-//router.use(upload.single('file'));
-
-//router.use(fileUpload());
-/*
-
-/*data.append('email',this.email.current.value)
-data.append('feedback',this.feedback.current.value)
-data.append('phone',this.phone.current.value)
-data.append('type',this.type.current.value);
-*/
 
 router.post('/addOrder',async (req, res) => {
   try {
@@ -103,16 +80,6 @@ router.get('/getPartners',async (req,res)=>{
     }
 })
 
-router.get('/about',async (req, res) => {
-    try {
-       const result = await mongo.getDataByInform(about_model, null, null, false,false);
-       console.log(result)
-       res.status(200).end(JSON.stringify(result[0]));
-    }catch (e){
-        error_logger.error(e);
-        res.status(400).send()
-    }
-})
 router.post("/addResume",  async function (req, res,next) {
     try {
 
