@@ -140,6 +140,22 @@ FeedBack.defaultColumns = 'email, feedback, phone, type';
 FeedBack.register();
 
 
+const responsive = new keystone.List('Responsive', {
+    autokey: { path: 'slug', from: 'title', unique: true },
+    map: { name: 'title' },
+    defaultSort: '-createdAt'
+});
+
+responsive.add({
+    url:{
+        type:Types.Text,
+        require:true
+    }
+})
+
+responsive.defaultColumns = 'url';
+responsive.register();
+
 
 
 module.exports = User
