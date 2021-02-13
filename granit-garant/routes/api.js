@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 const {Mongo} = require('../src/Mongo/MongoClass')
 const db_config = require('../src/Mongo/database.json')
-const multer  = require("multer");
-var fileUpload = require('express-fileupload');
 const tempJson = require('../src/about_us.json')
 const partners = require('../src/Mongo/mongo_model/partners_list')
 const resume  = require('../src/Mongo/mongo_model/resume_model')
 const vacansies = require('../src/Mongo/mongo_model/vacancies_feedback')
 const order = require('../src/Mongo/mongo_model/makeOrder')
-
+const responsive = require('../src/Mongo/mongo_model/responsive')
 
 
 
@@ -22,7 +20,17 @@ const mongo = new Mongo(db_config.ConnectUrl,'');
 
 
 
+router.get('/getResponsive',async (req, res) => {
 
+   try{
+       let data= await mongo.getDataByInform(responsive,{})
+       res.status(200).send(JSON.stringify(data))
+   }catch (e) {
+       res.status(403).send()
+       console.log(e)
+   }
+
+})
 router.post('/addOrder',async (req, res) => {
   try {
       await mongo.insertData(order,{
