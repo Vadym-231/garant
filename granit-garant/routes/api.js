@@ -42,6 +42,7 @@ router.post('/addOrder',async (req, res) => {
 
       res.status(200).send()
   }catch (e) {
+      console.log(e)
       res.status(403).send()
   }
 
